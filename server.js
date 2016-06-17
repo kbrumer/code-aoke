@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
+//needs track js functions for retrieving spotifyAPI data.
 var track = require('./app/track/track.js');
 
 
@@ -22,10 +23,11 @@ app.get('/', function(req, res){
 app.post('/tracks', function(req, res){
   console.log('inside of /tracks get')
   var genre = req.body.genre;
-    var send = function(){
-      res.send(track.tracks);
-    }
-    track.trackFetch(genre, send);
+  //function to pass as a callback to trackFetch
+  var send = function(){
+    res.send(track.tracks);
+  }
+  track.trackFetch(genre, send);
 });
 
 
