@@ -21,7 +21,7 @@ var request = require('request');
 
 //the callback is our server app res.send wrapped in a function
 var trackFetch = function(genre, callback){
-  track = [];
+  tracks.length = 0;
   console.log('inside of track fetch');
   request.post(authOptions, function(error, response, json) {
     if (!error && response.statusCode === 200) {
