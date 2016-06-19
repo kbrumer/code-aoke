@@ -20,14 +20,34 @@ app.get('/', function(req, res){
   res.render('index.html');
 })
 
-app.post('/tracks', function(req, res){
+app.post('/genreTracks', function(req, res){
   console.log('inside of /tracks get')
   var genre = req.body.genre;
   //function to pass as a callback to trackFetch
   var send = function(){
     res.send(track.tracks);
   }
-  track.trackFetch(genre, send);
+  track.genreFetch(genre, send);
+});
+
+app.post('/yearTracks', function(req, res){
+  console.log('inside of /tracks get')
+  var year = req.body.year;
+  //function to pass as a callback to trackFetch
+  var send = function(){
+    res.send(track.tracks);
+  }
+  track.yearFetch(year, send);
+});
+
+app.post('/termTracks', function(req, res){
+  console.log('inside of /tracks get')
+  var term = req.body.term;
+  //function to pass as a callback to trackFetch
+  var send = function(){
+    res.send(track.tracks);
+  }
+  track.termFetch(term, send);
 });
 
 
