@@ -11,7 +11,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('views'));
-app.use('/public', express.static('public'))
+app.use('/styles', express.static('styles'));
 
 var port = 8888;
 
