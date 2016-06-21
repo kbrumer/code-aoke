@@ -53,7 +53,7 @@
               <form id="genre-form" name="genre">
                 <!-- <fieldset> -->
                 <h5>Genres</h5>
-                <select id="select-genre" name="genre"><br>
+                <select id="genre-select" name="genre"><br>
                   <option value="all">--Select Genre--</option>
                   <option value="rock">Rock</option>
                   <option value="hip-hop"> Hip-Hop</option>
@@ -105,18 +105,18 @@
 
     $('#genre-form').submit(function(e){
       e.preventDefault();
-      var radioGenre = $(this).find('#radio-genre , input:checked').val();
-      console.log(radioGenre);
+      var selectGenre = $(this).find('#genre-select , option:selected').val();
+      console.log(selectGenre);
       $.ajax({
         type: 'POST',
         url: '/genreTracks',
         data: {
-          'genre' : radioGenre
+          'genre' : selectGenre
         }
       })
       .then(function(data){
         data.forEach(function(track){
-        console.log(track.name);
+        console.log(track);
         })
       })
     });
@@ -133,7 +133,7 @@
       })
       .then(function(data){
         data.forEach(function(track){
-        console.log(track.name);
+        console.log(track);
         })
       })
     });
@@ -152,7 +152,7 @@
       })
       .then(function(data){
         data.forEach(function(track){
-        console.log(track.name);
+        console.log(track);
         })
       })
     });
