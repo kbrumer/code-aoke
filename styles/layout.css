@@ -7,7 +7,7 @@ header {
 }
 header i {
   position: fixed;
-  right: 5;
+  right: 5px;
   top: 0;
 }
 header h1 {
