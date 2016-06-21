@@ -23,7 +23,6 @@ app.get('/', function(req, res){
 app.post('/genreTracks', function(req, res){
   console.log('inside of /tracks get')
   var genre = req.body.genre;
-  //function to pass as a callback to trackFetch
   var send = function(){
     res.send(track.tracks);
   }
@@ -33,7 +32,6 @@ app.post('/genreTracks', function(req, res){
 app.post('/yearTracks', function(req, res){
   console.log('inside of /tracks get')
   var year = req.body.year;
-  //function to pass as a callback to trackFetch
   var send = function(){
     res.send(track.tracks);
   }
@@ -43,14 +41,11 @@ app.post('/yearTracks', function(req, res){
 app.post('/termTracks', function(req, res){
   console.log('inside of /tracks get')
   var term = req.body.term;
-  //function to pass as a callback to trackFetch
   var send = function(){
     res.send(track.tracks);
   }
   track.termFetch(term, send);
 });
-
-
 
 
 app.listen(port, function(){
