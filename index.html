@@ -1,8 +1,13 @@
 <!DOCTYPE>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="vendor/styles/normalize.css">
     <link rel="stylesheet" type="text/css" href="vendor/styles/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="styles/theme.css">
+    <link rel="stylesheet" type="text/css" href="styles/modules.css">
+    <link rel="stylesheet" type="text/css" href="styles/state.css">
   </head>
 
 
@@ -11,6 +16,7 @@
     <header>
       <div class="container">
         <div class="row">
+          <i class="fa fa-2x fa-bars"><div></div></i>
           <div class="twelve columns">
             <h1>Karaoke Roulette</h1>
           </div>
@@ -21,21 +27,78 @@
 
     <!-- main -->
     <main>
-      <div class="container">
+      <div class="container" id="gameStart">
         <div class="row">
-          <div class="six columns">
-            <button>VERSUS</button>
+          <div class="twelve columns">
+            <h3>So tell me what you want, what you really, really want:</h3>
           </div>
         </div>
         <div class="row">
           <div class="six columns">
-            <button>FREEPLAY</button>
+            <button id="freeplay">FREEPLAY</button>
+          </div>
+          <div class="six columns">
+            <button id="vs">VERSUS</button>
           </div>
         </div>
       </div>
     </main>
     <!-- /main -->
+      <section id="song-filter">
+       <h4>Pick your poison! Filter by genre, time period, or get specific with term search.</h4>
+       <br>
+       <div class="container">
+         <div class="row">
+            <div class="four columns">
+              <form id="genre-form" name="genre">
+                <!-- <fieldset> -->
+                <h5>Genres</h5>
+                <select id="select-genre" name="genre"><br>
+                  <option value="all">--Select Genre--</option>
+                  <option value="rock">Rock</option>
+                  <option value="hip-hop"> Hip-Hop</option>
+                  <option value="country"> Country</option>
+                  <option value="indie"> Indie</option>
+                  <option value="metal"> Metal</option>
+                  <option value="pop"> Pop</option>
+                  <option value="punk"> Punk</option>
+                  <option value="soul"> Soul</option>
+                  <option value="rap"> Rap</option>
+                </select><br>
+                <!-- </fieldset> -->
+                <input type="submit" value="Filter by Genre">
+              </form>
+            </div>
 
+            <div class="four columns">
+              <form id="year-form">
+                <fieldset>
+                  <h5>Time Period</h5>
+                  <select id="#year-select" name="year"><br>
+                    <option value="">--Select Decade--</option>
+                    <option value="2000-2010">2000-2010</option>
+                    <option value="1990-2000">1990-2000</option>
+                    <option value="1980-1990">1980-1990</option>
+                    <option value="1970-1980">1970-1980</option>
+                    <option value="1960-1970">1960-1970</option>
+                  </select>
+                </fieldset>
+                <input type="submit" value="Filter by Year">
+              </form>
+            </div>
+          <div class="four columns">
+            <form id="term-form">
+              <fieldset>
+                <h5>Term Search</h5>
+                <input type="text" value="Enter Term"/>
+              </fieldset>
+              <input type="submit" value="Filter by Term">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  <script src="https://use.fonticons.com/2c3b87aa.js"></script>
   </body>
 
 </html>
