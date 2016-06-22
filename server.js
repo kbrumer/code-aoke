@@ -3,6 +3,7 @@ var request = require('request');
 var bodyParser = require('body-parser');
 //needs track js functions for retrieving spotifyAPI data.
 var track = require('./app/track/track.js');
+var video = require('./app/video/video.js');
 
 
 
@@ -12,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('views'));
 app.use('/styles', express.static('styles'));
+app.use('/vendor', express.static('vendor'));
+app.use('/scripts', express.static('scripts'));
+app.use('/hbs', express.static('hbs'));
+
 
 var port = 8888;
 
@@ -20,16 +25,37 @@ app.get('/', function(req, res){
   res.render('index.html');
 })
 
-app.post('/tracks', function(req, res){
+app.post('/genreTracks', function(req, res){
   console.log('inside of /tracks get')
   var genre = req.body.genre;
-  //function to pass as a callback to trackFetch
   var send = function(){
     res.send(track.tracks);
   }
-  track.trackFetch(genre, send);
+  track.genreFetch(genre, send);
 });
 
+app.post('/yearTracks', function(req, res){
+  console.log('inside of /tracks get')
+  var year = req.body.year;
+  var send = function(){
+    res.send(track.tracks);
+  }
+  track.yearFetch(year, send);
+});
+
+app.post('/termTracks', function(req, res){
+  console.log('inside of /tracks get')
+  var term = req.body.term;
+  var send = function(){
+    res.send(track.tracks);
+  }
+  track.termFetch(term, send);
+});
+
+app.post('/video', function(req, res){
+  console.log('inside of /video post')
+  video.videoFetch();
+});
 
 
 
