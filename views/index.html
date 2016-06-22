@@ -1,122 +1,186 @@
-<!doctype html>
+<!DOCTYPE>
 <html>
   <head>
-    <title>Example of the Implicit Grant flow with Spotify</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/layout.css">
-    <link rel="stylesheet" href="/public/css/theme.css">
-    <link rel="stylesheet" href="/public/css/styles.css">
-    <link rel="stylesheet" href="/public/css/modules.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="vendor/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="vendor/styles/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="styles/theme.css">
+    <link rel="stylesheet" type="text/css" href="styles/modules.css">
+    <link rel="stylesheet" type="text/css" href="styles/state.css">
   </head>
 
   <body>
-    <div class="container">
-      <div id="song-select">
-        <h3>Your Songs</h3>
-        <ul>
-        </ul>
+    <!-- header -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <i class="fa fa-2x fa-bars"><div></div></i>
+          <div class="twelve columns">
+            <h1>Karaoke Roulette</h1>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="container">
-      <form id="genre-form" name="genre">
-        <fieldset id="#radio-genre">
-          <h1>Genres</h1>
-          <input type="radio" name="genre" value="rock"> Rock<br>
-          <input type="radio" name="genre" value="hip-hop"> Hip-Hop<br>
-          <input type="radio" name="genre" value="country"> Country<br />
-          <input type="radio" name="genre" value="indie"> Indie<br>
-          <input type="radio" name="genre" value="metal"> Metal<br>
-          <input type="radio" name="genre" value="pop"> Pop<br />
-          <input type="radio" name="genre" value="punk"> Punk<br>
-          <input type="radio" name="genre" value="soul"> Soul<br />
-          <input type="radio" name="genre" value="rap"> Rap<br />
-        </fieldset>
-        <input type="submit" value="Submit">
-      </form>
-      <form id="year-form">
-        <fieldset>
-          <h1>Time Period</h1>
-          <select id="#year-select" name="year"><br>
-            <option value="2000-2010">2000-2010</option>
-            <option value="1990-2000">1990-2000</option>
-            <option value="1980-1990">1980-1990</option>
-            <option value="1970-1980">1970-1980</option>
-            <option value="1960-1970">1960-1970</option>
-          </select>
-        </fieldset>
-        <input type="submit" value="Submit">
-      </form>
-      <form id="term-form">
-        <fieldset>
-          <h1>Term Search</h1>
-          <input type="text" value=""/>
-        </fieldset>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+    </header>
+    <!-- /header -->
 
-    <script id="oauth-template" type="text/x-handlebars-template">
-      <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-      </dl>
-    </script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-    <script>
+    <!-- main -->
+    <main>
+      <div class="container" id="gameStart">
+        <div class="row">
+          <div class="twelve columns">
+            <h3>So tell me what you want, what you really, really want:</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns">
+            <button id="freeplay">FREEPLAY</button>
+          </div>
+          <div class="six columns">
+            <button id="vs">VERSUS</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- /main -->
+      <section id="song-filter">
+       <h4>Pick your poison! Filter by genre, time period, or get specific with term search.</h4>
+       <br>
+       <div class="container">
 
-      $('#genre-form').submit(function(e){
-        e.preventDefault();
-        var radioGenre = $(this).find('#radio-genre , input:checked').val();
-        console.log(radioGenre);
-        $.ajax({
-          type: 'POST',
-          url: '/genreTracks',
-          data: {
-            'genre' : radioGenre
-          }
-        })
-        .then(function(data){
-          data.forEach(function(track){
-          console.log(track.name);
-          })
-        })
-      });
-      $('#year-form').submit(function(e){
-        e.preventDefault();
-        var selectYear = $(this).find('#year-select , option:selected').val();
-        console.log(selectYear);
-        $.ajax({
-          type: 'POST',
-          url: '/yearTracks',
-          data: {
-            'year' : selectYear
-          }
-        })
-        .then(function(data){
-          data.forEach(function(track){
-          console.log(track.name);
-          })
-        })
-      });
+         <!--- experiment with server youtube API call  ------->
+       <button id="video"> Video</button>
+       <!--- experiment with server youtube API call  ------->
 
-      $('#term-form').submit(function(e){
-        e.preventDefault();
-        var inputTerm = $(this).find('input').val();
-        console.log('HWATST')
-        console.log(inputTerm);
-        $.ajax({
-          type: 'POST',
-          url: '/termTracks',
-          data: {
-            'term' : inputTerm
-          }
+         <div class="row">
+            <div class="four columns">
+              <form id="genre-form" name="genre">
+                <!-- <fieldset> -->
+                <h5>Genres</h5>
+                <select id="genre-select" name="genre"><br>
+                  <option value="all">--Select Genre--</option>
+                  <option value="rock">Rock</option>
+                  <option value="hip-hop"> Hip-Hop</option>
+                  <option value="country"> Country</option>
+                  <option value="indie"> Indie</option>
+                  <option value="metal"> Metal</option>
+                  <option value="pop"> Pop</option>
+                  <option value="punk"> Punk</option>
+                  <option value="soul"> Soul</option>
+                  <option value="rap"> Rap</option>
+                </select><br>
+                <!-- </fieldset> -->
+                <input type="submit" value="Filter by Genre">
+              </form>
+            </div>
+
+            <div class="four columns">
+              <form id="year-form">
+                <fieldset>
+                  <h5>Time Period</h5>
+                  <select id="#year-select" name="year"><br>
+                    <option value="">--Select Decade--</option>
+                    <option value="2000-2010">2000-2010</option>
+                    <option value="1990-2000">1990-2000</option>
+                    <option value="1980-1990">1980-1990</option>
+                    <option value="1970-1980">1970-1980</option>
+                    <option value="1960-1970">1960-1970</option>
+                  </select>
+                </fieldset>
+                <input type="submit" value="Filter by Year">
+              </form>
+            </div>
+          <div class="four columns">
+            <form id="term-form">
+              <fieldset>
+                <h5>Term Search</h5>
+                <input type="text" value="Enter Term"/>
+              </fieldset>
+              <input type="submit" value="Filter by Term">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="track-list">
+    </section>
+
+  <script src="https://use.fonticons.com/2c3b87aa.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+  <script src="/scripts/template.js"></script>
+  <script src="/scripts/trackList.js"></script>
+  <script>
+  trackList.initAll();
+
+    // $('#genre-form').submit(function(e){
+    //   e.preventDefault();
+    //   var selectGenre = $(this).find('#genre-select , option:selected').val();
+    //   console.log(selectGenre);
+    //   $.ajax({
+    //     type: 'POST',
+    //     url: '/genreTracks',
+    //     data: {
+    //       'genre' : selectGenre
+    //     }
+    //   })
+    //   .then(function(data){
+    //     data.forEach(function(track){
+    //     console.log(track);
+    //     })
+    //   })
+    // });
+    $('#year-form').submit(function(e){
+      e.preventDefault();
+      var selectYear = $(this).find('#year-select , option:selected').val();
+      console.log(selectYear);
+      $.ajax({
+        type: 'POST',
+        url: '/yearTracks',
+        data: {
+          'year' : selectYear
+        }
+      })
+      .then(function(data){
+        data.forEach(function(track){
+        console.log(track);
         })
-        .then(function(data){
-          data.forEach(function(track){
-          console.log(track.name);
-          })
+      })
+    });
+
+    $('#term-form').submit(function(e){
+      e.preventDefault();
+      var inputTerm = $(this).find('input').val();
+      console.log(inputTerm);
+      $.ajax({
+        type: 'POST',
+        url: '/termTracks',
+        data: {
+          'term' : inputTerm
+        }
+      })
+      .then(function(data){
+        data.forEach(function(track){
+        console.log(track);
         })
-      });
-  </script>
+      })
+    });
+
+/// ------- experiment with server youtube API call --------- ////
+    $('#video').on('click', function(e){
+      e.preventDefault();
+      console.log('works')
+      $.ajax({
+        type: 'POST',
+        url: '/video',
+      })
+      .then(function(data){
+        data.forEach(function(track){
+        console.log(track);
+        })
+      })
+    });
+  /// ------- experiment with server youtube API call --------- ////
+</script>
+</body>
 </html>
