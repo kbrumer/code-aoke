@@ -54,7 +54,6 @@ var genreFetch = function(genre, callback){
 
           for (i = 0 ; i < json.tracks.items.length; i ++){
             if (json.tracks.items[i].popularity > 50){
-              console.log(json.tracks.items[i].href)
               var opts = {
                 track: json.tracks.items[i].name,
                 artist: json.tracks.items[i].artists[0].name,
@@ -62,7 +61,7 @@ var genreFetch = function(genre, callback){
                 album: json.tracks.items[i].album.name,
                 time: millisToMinutesAndSeconds(json.tracks.items[i].duration_ms),
                 artistHref: json.tracks.items[i].artists[0].href,
-                ieExplicit: json.tracks.items[i].explicit,
+                isExplicit: json.tracks.items[i].explicit,
               }
               var track = new Track(opts);
               tracks.push(track);
@@ -97,7 +96,7 @@ var yearFetch = function(year, callback) {
             album: json.tracks.items[i].album.name,
             time: millisToMinutesAndSeconds(json.tracks.items[i].duration_ms),
             artistHref: json.tracks.items[i].artists[0].href,
-            ieExplicit: json.tracks.items[i].explicit,
+            isExplicit: json.tracks.items[i].explicit,
           }
           var track = new Track(opts);
           tracks.push(track);
@@ -111,6 +110,7 @@ var yearFetch = function(year, callback) {
 
 var termFetch = function(term, callback) {
   tracks.length = 0;
+  // console.log();
   request.post(authOptions, function(error, response, json) {
     if (!error && response.statusCode === 200) {
     var term_token = json.access_token;
@@ -132,7 +132,7 @@ var termFetch = function(term, callback) {
             album: json.tracks.items[i].album.name,
             time: millisToMinutesAndSeconds(json.tracks.items[i].duration_ms),
             artistHref: json.tracks.items[i].artists[0].href,
-            ieExplicit: json.tracks.items[i].explicit,
+            isExplicit: json.tracks.items[i].explicit,
           }
           var track = new Track(opts);
           tracks.push(track);

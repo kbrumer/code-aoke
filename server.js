@@ -3,6 +3,7 @@ var request = require('request');
 var bodyParser = require('body-parser');
 //needs track js functions for retrieving spotifyAPI data.
 var track = require('./app/track/track.js');
+var video = require('./app/video/video.js');
 
 
 
@@ -13,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('views'));
 app.use('/styles', express.static('styles'));
 app.use('/vendor', express.static('vendor'));
+app.use('/scripts', express.static('scripts'));
+app.use('/hbs', express.static('hbs'));
+
 
 var port = 8888;
 
@@ -47,6 +51,12 @@ app.post('/termTracks', function(req, res){
   }
   track.termFetch(term, send);
 });
+
+app.post('/video', function(req, res){
+  console.log('inside of /video post')
+  video.videoFetch();
+});
+
 
 
 app.listen(port, function(){
