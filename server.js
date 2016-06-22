@@ -28,8 +28,8 @@ app.get('/', function(req, res){
 app.post('/genreTracks', function(req, res){
   console.log('inside of /tracks get')
   var genre = req.body.genre;
-  var send = function(){
-    res.send(track.tracks);
+  var send = function(data){
+    res.send(data);
   }
   track.genreFetch(genre, send);
 });
@@ -37,8 +37,8 @@ app.post('/genreTracks', function(req, res){
 app.post('/yearTracks', function(req, res){
   console.log('inside of /tracks get')
   var year = req.body.year;
-  var send = function(){
-    res.send(track.tracks);
+  var send = function(data){
+    res.send(data);
   }
   track.yearFetch(year, send);
 });
@@ -46,8 +46,8 @@ app.post('/yearTracks', function(req, res){
 app.post('/termTracks', function(req, res){
   console.log('inside of /tracks get')
   var term = req.body.term;
-  var send = function(){
-    res.send(track.tracks);
+  var send = function(data){
+    res.send(data);
   }
   track.termFetch(term, send);
 });
