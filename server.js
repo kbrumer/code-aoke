@@ -5,9 +5,6 @@ var bodyParser = require('body-parser');
 var track = require('./app/track/track.js');
 var video = require('./app/video/video.js');
 
-
-
-
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -17,8 +14,10 @@ app.use('/vendor', express.static('vendor'));
 app.use('/scripts', express.static('scripts'));
 app.use('/hbs', express.static('hbs'));
 
-
 var port = 8888;
+
+
+
 
 
 app.get('/', function(req, res){
@@ -56,6 +55,7 @@ app.post('/video', function(req, res){
   console.log('inside of /video post')
   video.videoFetch();
 });
+
 
 
 
