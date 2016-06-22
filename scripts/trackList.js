@@ -1,6 +1,5 @@
 (function(module){
 var trackList = {};
-// trackList.All = [];
 
 trackList.toHtml = function(track){
   $('#track-list').empty();
