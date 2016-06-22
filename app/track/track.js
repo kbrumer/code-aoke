@@ -14,7 +14,6 @@ var request = require('request');
     return Math.abs(Math.floor((Math.random() * max)));
   }
 
-
   var client_id = spotifyAPI.client_id;
   var client_secret = spotifyAPI.client_secret;
   var redirect_uri = spotifyAPI.redirect_uri;

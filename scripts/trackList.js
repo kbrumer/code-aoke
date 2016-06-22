@@ -4,7 +4,7 @@ var trackList = {};
 trackList.toHtml = function(track){
   $('#track-list').empty();
   getCompiledTemplate("track").then(function(handlebarsCompile){
-    // console.log(handlebarsCompile);
+    // console.log(handlebarsCompile);  
     var html = handlebarsCompile(track);
     // console.log(html);
     $('#track-list').append(html);

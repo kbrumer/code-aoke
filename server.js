@@ -53,7 +53,10 @@ app.post('/termTracks', function(req, res){
 
 app.post('/video', function(req, res){
   console.log('inside of /video post')
-  video.videoFetch();
+  var send = function(data){
+    res.send(data);
+  }
+  video.videoFetch(req.body.track , req.body.artist , send);
 });
 
 
