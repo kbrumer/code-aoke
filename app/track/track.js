@@ -3,6 +3,18 @@ var spotifyAPI = require('../../config/spotify_api.js');
 var request = require('request');
 
 (function(){
+
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  function getRandomInt(max) {
+    return Math.abs(Math.floor((Math.random() * max)));
+  }
+
+
   var client_id = spotifyAPI.client_id;
   var client_secret = spotifyAPI.client_secret;
   var redirect_uri = spotifyAPI.redirect_uri;
@@ -18,6 +30,7 @@ var request = require('request');
   }
 
   var tracks = [];
+  var fetchResponse = [];
 
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -30,15 +43,12 @@ var request = require('request');
     json: true
   };
 
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
+
 
 //the callback is our server app res.send wrapped in a function
 var genreFetch = function(genre, callback){
   tracks.length = 0;
+  fetchResponse.length = 0;
   console.log('inside of track fetch');
   request.post(authOptions, function(error, response, json) {
     if (!error && response.statusCode === 200) {
@@ -51,7 +61,6 @@ var genreFetch = function(genre, callback){
         json: true
       };
         request.get(genreOptions, function(error, response, json) {
-
           for (i = 0 ; i < json.tracks.items.length; i ++){
             if (json.tracks.items[i].popularity > 50){
               var opts = {
@@ -67,7 +76,14 @@ var genreFetch = function(genre, callback){
               tracks.push(track);
             };
           };
-          callback();
+          for (;fetchResponse.length < 5;){
+            var index = getRandomInt(tracks.length);
+            var track = tracks[index];
+            if(fetchResponse.indexOf(track) === -1){
+              fetchResponse.push(track);
+            }
+          }
+          callback(fetchResponse);
         });
       }
     });
@@ -75,6 +91,7 @@ var genreFetch = function(genre, callback){
 
 var yearFetch = function(year, callback) {
   tracks.length = 0;
+  fetchResponse.length = 0;
   request.post(authOptions, function(error, response, json) {
     if (!error && response.statusCode === 200) {
     var year_token = json.access_token;
@@ -102,7 +119,14 @@ var yearFetch = function(year, callback) {
           tracks.push(track);
         };
       };
-      callback();
+      for (;fetchResponse.length < 5;){
+        var index = getRandomInt(tracks.length);
+        var track = tracks[index];
+        if(fetchResponse.indexOf(track) === -1){
+          fetchResponse.push(track);
+        }
+      }
+      callback(fetchResponse);
     });
     }
   });
@@ -110,7 +134,7 @@ var yearFetch = function(year, callback) {
 
 var termFetch = function(term, callback) {
   tracks.length = 0;
-  // console.log();
+  fetchResponse.length = 0;
   request.post(authOptions, function(error, response, json) {
     if (!error && response.statusCode === 200) {
     var term_token = json.access_token;
@@ -138,7 +162,14 @@ var termFetch = function(term, callback) {
           tracks.push(track);
         };
       };
-      callback();
+      for (;fetchResponse.length < 5;){
+        var index = getRandomInt(tracks.length);
+        var track = tracks[index];
+        if(fetchResponse.indexOf(track) === -1){
+          fetchResponse.push(track);
+        }
+      }
+      callback(fetchResponse);
     });
     }
   });
