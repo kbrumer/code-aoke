@@ -130,58 +130,6 @@
   <script>
   trackList.initAll();
 
-    // $('#genre-form').submit(function(e){
-    //   e.preventDefault();
-    //   var selectGenre = $(this).find('#genre-select , option:selected').val();
-    //   console.log(selectGenre);
-    //   $.ajax({
-    //     type: 'POST',
-    //     url: '/genreTracks',
-    //     data: {
-    //       'genre' : selectGenre
-    //     }
-    //   })
-    //   .then(function(data){
-    //     data.forEach(function(track){
-    //     console.log(track);
-    //     })
-    //   })
-    // });
-    $('#year-form').submit(function(e){
-      e.preventDefault();
-      var selectYear = $(this).find('#year-select , option:selected').val();
-      console.log(selectYear);
-      $.ajax({
-        type: 'POST',
-        url: '/yearTracks',
-        data: {
-          'year' : selectYear
-        }
-      })
-      .then(function(data){
-        data.forEach(function(track){
-        console.log(track);
-        })
-      })
-    });
-
-    $('#term-form').submit(function(e){
-      e.preventDefault();
-      var inputTerm = $(this).find('input').val();
-      console.log(inputTerm);
-      $.ajax({
-        type: 'POST',
-        url: '/termTracks',
-        data: {
-          'term' : inputTerm
-        }
-      })
-      .then(function(data){
-        data.forEach(function(track){
-        console.log(track);
-        })
-      })
-    });
 
 /// ------- experiment with server youtube API call --------- ////
     $('#video').on('click', function(e){
