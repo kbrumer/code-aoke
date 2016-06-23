@@ -27,7 +27,7 @@ trackList.genreFetch = function(){
     .then(function(data){
       data.forEach(function(track){
         trackList.toHtml(track);
-        // console.log(track);
+        console.log(track);
       })
     })
   });
@@ -67,6 +67,7 @@ trackList.termFetch = function(){
     .then(function(data){
       data.forEach(function(track){
         trackList.toHtml(track);
+        console.log(track);
       })
     })
   });

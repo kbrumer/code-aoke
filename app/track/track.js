@@ -48,10 +48,13 @@ var request = require('request');
 var genreFetch = function(genre, callback){
   tracks.length = 0;
   fetchResponse.length = 0;
-  console.log('inside of track fetch');
+  console.log('inside of genreFetch');
   request.post(authOptions, function(error, response, json) {
-    if (!error && response.statusCode === 200) {
+    console.log(error);
+    if (!error) {
+
       var token = json.access_token;
+      console.log(token);
       var genreOptions = {
         url: 'https://api.spotify.com/v1/search?q=genre:' + genre + '&type=track&limit=50',
         headers: {
