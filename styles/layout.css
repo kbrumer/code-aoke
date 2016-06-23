@@ -24,4 +24,23 @@ header h1 {
     header h1 {
       display: none;
     }
+    .container {
+      margin: 0;
+      width: 100%;
+    }
+
+    #nav ul {
+      list-style: none;
+      margin-right: 50rem;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      border-bottom: solid #1B2347 5px;
+      padding-bottom: 1rem;
+    }
+    #nav li {
+      display: inline;
+      padding: 4rem;
+      font-size: 2rem;
+    }
 }
