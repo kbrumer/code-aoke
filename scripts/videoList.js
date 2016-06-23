@@ -29,7 +29,7 @@
       })
       .then(function(data){
         data.forEach(function(track){
-          console.log(track);
+          // console.log(track);
           videoList.toHtml(track);
         })
       })
